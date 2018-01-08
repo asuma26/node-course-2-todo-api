@@ -1,7 +1,7 @@
 //const MongoClient=require('mongodb').MongoClient;
 const {MongoClient,ObjectID}=require('mongodb');
 
-var obj=new ObjectID("5a52615b4bf2d94058a3e8b1");
+//var obj=new ObjectID();
 //console.log(obj);
 MongoClient.connect('mongodb://localhost:27017/TodoApp',(error,db)=>{
   if(error){
@@ -23,7 +23,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(error,db)=>{
 //   console.log(result);
 // })
 
-db.collection('Users').findOneAndDelete({_id:obj}).then((result)=>{
+db.collection('Users').findOneAndDelete({_id:new ObjectID("5a52615b4bf2d94058a3e8b1")}).then((result)=>{
   console.log(result);
 })
   //db.close();//closes the connection
