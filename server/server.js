@@ -24,7 +24,14 @@ todo.save().then((doc)=>{
 });
 });
 
+app.get('/todos',(req,res)=>{
+  Todo.find().then((todos)=>{
+    res.send({todos});  //by sending this in { } form u can add some custom status code
 
+  },(e)=>{
+    res.status(400).send(e);//console.log(e);
+  })
+})
 
 
 app.listen(3000,()=>{
