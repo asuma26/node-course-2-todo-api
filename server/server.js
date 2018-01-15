@@ -138,7 +138,22 @@ user.save().then(()=>{
 //     res.status(400).send(e);
 //   })
 // });
+app.post('/users/login',(req,res)=>{
 
+  var body=_.pick(req.body,['email','password']);
+  //if user is not found catch get excuted!!
+  User.findByCredentials(body.email,body.password).then((user)=>{
+    return user.generateAuthToken().then((token) => {
+       res.header('x-auth', token).send(user);
+     });
+  }).catch((e)=>{
+    res.status(400).send();
+  });
+
+
+},(e)=>{
+  res.status(404).send((e));
+});
 
 app.listen(port,()=>{
   console.log(`started up at port ${port}`);
